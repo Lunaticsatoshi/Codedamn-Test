@@ -11,6 +11,11 @@ const CodeEditor = () => {
     console.log("here is the current model value:", value);
   };
 
+  const handleEditorValidation = (markers) => {
+    // model markers
+    markers.forEach((marker) => console.log("onValidate:", marker.message));
+  };
+
   return (
     <Editor
       height="90vh"
@@ -18,6 +23,7 @@ const CodeEditor = () => {
       defaultValue="// some comment"
       onMount={handleEditorDidMount}
       onChange={handleEditorChange}
+      onValidate={handleEditorValidation}
       theme="vs-dark"
     />
   );
