@@ -9,8 +9,12 @@ const CodeEditor = dynamic(() => import("../components/CodeEditor"), {
 export default function Home() {
   return (
     <div className={styles.container}>
-      <h1>Hello</h1>
-      <CodeEditor />
+      <div className="pane">
+        <CodeEditor />
+      </div>
+      <div className="pane right__pane">
+        <h1>Right Pane</h1>
+      </div>
     </div>
   );
 }
