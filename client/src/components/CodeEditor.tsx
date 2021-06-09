@@ -18,8 +18,6 @@ const CodeEditor = () => {
 
   return (
     <Editor
-      height="90vh"
-      width="60vw"
       defaultLanguage="javascript"
       defaultValue="// some comment"
       onMount={handleEditorDidMount}
