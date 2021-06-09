@@ -1,7 +1,6 @@
 .container {
   min-height: 100vh;
-  max-width: 10px auto;
-  margin: 100px auto;
+  margin: 20px auto;
   padding: 10px 10px;
   display: flex;
   height: 100vh;
