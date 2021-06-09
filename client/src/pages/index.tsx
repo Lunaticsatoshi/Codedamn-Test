@@ -12,6 +12,10 @@ const CodeEditor = dynamic(() => import("../components/CodeEditor"), {
 const Navbar = dynamic(() => import("../components/Navbar"), {
   ssr: false,
 });
+
+const DynamicTerminal = dynamic(() => import("../components/Terminal"), {
+  ssr: false,
+});
 export default function Home() {
   return (
     <div>
@@ -24,7 +28,7 @@ export default function Home() {
               <h1>Right Top Pane</h1>
             </div>
             <div className={styles.pane}>
-              <h1>Right Bottom Pane</h1>
+              <DynamicTerminal />
             </div>
           </SplitPane>
         </SplitPane>
