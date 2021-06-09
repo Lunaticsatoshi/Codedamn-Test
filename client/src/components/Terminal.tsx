@@ -41,9 +41,8 @@ const TerminalComponent = () => {
         // Control
         return;
       } else {
-        // Visible
-        term.write(data);
-        curr_lines += data;
+        curr_lines =
+          curr_lines.substr(0, cursor) + data + curr_lines.substr(cursor);
       }
     });
     // term.onKey(({ key, domEvent }) => {
