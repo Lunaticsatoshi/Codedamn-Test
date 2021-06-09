@@ -8,7 +8,6 @@
 
 .pane {
   display: flex;
-  background-color: #ffffff;
-  color: #000000;
   height: 100%;
+  border-bottom: 2px solid #ffffff;
 }
