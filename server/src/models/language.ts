@@ -15,4 +15,4 @@ const languageSchema: Schema = new Schema(
   { timestamps: true }
 );
 
-export default model<ILanguage>("Todo", languageSchema);
+export default model<ILanguage>("Language", languageSchema);
