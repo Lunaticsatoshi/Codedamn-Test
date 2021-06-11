@@ -14,7 +14,7 @@ const options = {
 export const connectDB = async () => {
   try {
     await connect(mongoURI, options);
-    console.log("Connected to MongoDb");
+    console.log("Connected to MongoDb!");
   } catch (error) {
     throw error;
   }
