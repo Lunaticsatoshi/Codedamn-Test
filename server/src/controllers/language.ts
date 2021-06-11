@@ -8,7 +8,7 @@ export const getLanguages = async (
 ): Promise<void> => {
   try {
     const language: ILanguage[] = await Language.find();
-    if (language) {
+    if (language.length > 0) {
       res.status(200).json({ language });
     } else {
       res.status(200).json({
@@ -28,7 +28,7 @@ export const addLanguages = async (
   const body = req.body as Pick<ILanguage, "file" | "description">;
   try {
     const language: ILanguage[] = await Language.find();
-    if (!language) {
+    if (language.length <= 0) {
       const language: ILanguage = new Language({
         file: body.file,
         description: body.description,
