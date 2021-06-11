@@ -1,7 +1,5 @@
 import { connect } from "mongoose";
 
-console.log("Mongo URI", process.env.MONGOURI);
-
 const mongoURI: string = process.env.MONGOURI!;
 
 const options = {
