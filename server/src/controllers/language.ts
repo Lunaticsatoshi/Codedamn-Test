@@ -1,11 +1,18 @@
 import { Request, Response } from "express";
 import { ILanguage } from "./../@types/language";
-import Todo from "../models/language";
+import Language from "../models/language";
 
 export const getTodos = async (_: Request, res: Response): Promise<void> => {
   try {
-    const todos: ILanguage[] = await Todo.find();
-    res.status(200).json({ todos });
+    const language: ILanguage[] = await Language.find();
+    if (language) {
+      res.status(200).json({ language });
+    } else {
+      res.status(200).json({
+        file: "javascript",
+        description: "#comment",
+      });
+    }
   } catch (error) {
     throw error;
   }
@@ -14,14 +21,23 @@ export const getTodos = async (_: Request, res: Response): Promise<void> => {
 export const addTodos = async (req: Request, res: Response): Promise<void> => {
   const body = req.body as Pick<ILanguage, "file" | "description">;
   try {
-    const language: ILanguage = new Todo({
-      file: body.file,
-      description: body.description,
-    });
+    const language: ILanguage[] = await Language.find();
+    if (!language) {
+      const language: ILanguage = new Language({
+        file: body.file,
+        description: body.description,
+      });
 
-    const newLanguage: ILanguage = await language.save();
+      const newLanguage: ILanguage = await language.save();
 
-    res.status(201).json({ message: "File Added", language: newLanguage });
+      res.status(201).json({ message: "File Added", language: newLanguage });
+    } else {
+      const updatedLanguage: ILanguage | null =
+        await Language.findByIdAndUpdate({ _id: language[0]._id }, body);
+      res
+        .status(201)
+        .json({ message: "File Updated", language: updatedLanguage });
+    }
   } catch (error) {
     throw error;
   }
