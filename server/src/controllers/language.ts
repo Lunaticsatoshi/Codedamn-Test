@@ -2,7 +2,10 @@ import { Request, Response } from "express";
 import { ILanguage } from "./../@types/language";
 import Language from "../models/language";
 
-export const getTodos = async (_: Request, res: Response): Promise<void> => {
+export const getLanguages = async (
+  _: Request,
+  res: Response
+): Promise<void> => {
   try {
     const language: ILanguage[] = await Language.find();
     if (language) {
@@ -18,7 +21,10 @@ export const getTodos = async (_: Request, res: Response): Promise<void> => {
   }
 };
 
-export const addTodos = async (req: Request, res: Response): Promise<void> => {
+export const addLanguages = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
   const body = req.body as Pick<ILanguage, "file" | "description">;
   try {
     const language: ILanguage[] = await Language.find();
