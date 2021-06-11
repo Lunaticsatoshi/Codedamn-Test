@@ -1,6 +1,7 @@
 import { connect } from "mongoose";
+import { config } from "dotenv";
 
-// dotenv.config({ path: "src/config/.env" });
+config({ path: "src/.env" });
 
 const mongoURI: string = process.env.MONGOURI!;
 
