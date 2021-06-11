@@ -1,5 +1,4 @@
 import { connect } from "mongoose";
-import dotenv from "dotenv";
 
 // dotenv.config({ path: "src/config/.env" });
 
