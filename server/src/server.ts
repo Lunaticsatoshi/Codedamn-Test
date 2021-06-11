@@ -1,9 +1,10 @@
 import { config } from "dotenv";
 config();
+
 import express, { Application, json } from "express";
 import cors from "cors";
-
 import { connectDB } from "./config/db";
+import languageRoutes from "./routes/language";
 
 const app: Application = express();
 
@@ -11,7 +12,7 @@ app.use(cors());
 
 app.use(json());
 
-// app.use(todoRoutes);
+app.use(languageRoutes);
 
 connectDB();
 
