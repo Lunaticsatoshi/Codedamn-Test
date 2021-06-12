@@ -71,6 +71,11 @@ a {
   color: #c60d0d;
 }
 
+.select__inputs {
+  margin: 20px auto;
+  padding: 10px 10px;
+}
+
 .select__input {
   height: 50px;
   width: 170px;
