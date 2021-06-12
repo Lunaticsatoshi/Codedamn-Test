@@ -20,6 +20,14 @@ export default function Home() {
   return (
     <div>
       <Navbar />
+      <div>
+        <select className="select__input" id="Language">
+          <option>javascript</option>
+          <option>javascript</option>
+          <option>javascript</option>
+          <option>javascript</option>
+        </select>
+      </div>
       <div className={styles.container}>
         <SplitPane split="vertical" minSize={50}>
           <CodeEditor />
