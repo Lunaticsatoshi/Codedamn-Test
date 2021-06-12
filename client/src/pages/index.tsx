@@ -34,8 +34,8 @@ export default function Home() {
     const { data } = await axios.get("http://localhost:5000/api/v1/languages");
     return data;
   };
-  const onChange = (value) => {
-    setValue(value);
+  const onChange = (newValue) => {
+    setValue(newValue);
   };
 
   const reloadWindow = async () => {
@@ -52,6 +52,19 @@ export default function Home() {
     console.log(data);
     console.log("reloaded");
   };
+
+  const saveData = async () => {
+    const newData = {
+      file: language,
+      description: value,
+    };
+    console.log(newData);
+    const { data } = await axios.post(
+      "http://localhost:5000/api/v1/addLanguages",
+      newData
+    );
+    console.log(data);
+  };
   return (
     <div>
       <Navbar />
@@ -63,7 +76,9 @@ export default function Home() {
           <option>javascript</option>
         </select>
 
-        <button className="save__button">Save</button>
+        <button className="save__button" onClick={() => saveData()}>
+          Save
+        </button>
       </div>
       <div className={styles.container}>
         <SplitPane split="vertical" minSize={50}>
