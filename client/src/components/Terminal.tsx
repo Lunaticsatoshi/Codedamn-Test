@@ -7,7 +7,6 @@ const TerminalComponent = () => {
       cursorBlink: true,
       cursorStyle: "block",
     });
-    const ws = new WebSocket("ws://localhost:3000", "echo-protocol");
     let curr_lines = "";
     let entries = [];
     let cursor = 0;
@@ -15,6 +14,7 @@ const TerminalComponent = () => {
     term.write("Codeddit \x1B[1;3;31mxterm.js\x1B[0m ~$ ");
     term.onData((data) => {
       const code = data.charCodeAt(0);
+      term.write(data);
       if (code == 27) {
         switch (data.substr(1)) {
           case "[C": // Right arrow
