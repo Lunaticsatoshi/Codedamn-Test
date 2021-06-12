@@ -26,7 +26,6 @@ export default function Home() {
       const { file, description } = language[0];
       setLanguage(file);
       setValue(description);
-      console.log(React.createElement("span", null));
     };
     fetchData();
   }, []);
@@ -34,6 +33,24 @@ export default function Home() {
   const getData = async () => {
     const { data } = await axios.get("http://localhost:5000/api/v1/languages");
     return data;
+  };
+  const onChange = (value) => {
+    setValue(value);
+  };
+
+  const reloadWindow = async () => {
+    console.log("reloading");
+    const newData = {
+      file: language,
+      description: value,
+    };
+    console.log(newData);
+    const { data } = await axios.post(
+      "http://localhost:5000/api/v1/addLanguages",
+      newData
+    );
+    console.log(data);
+    console.log("reloaded");
   };
   return (
     <div>
@@ -45,10 +62,17 @@ export default function Home() {
           <option>javascript</option>
           <option>javascript</option>
         </select>
+
+        <button className="save__button">Save</button>
       </div>
       <div className={styles.container}>
         <SplitPane split="vertical" minSize={50}>
-          <CodeEditor language={language} value={value} />
+          <CodeEditor
+            language={language}
+            value={value}
+            onChange={onChange}
+            reloadWindow={reloadWindow}
+          />
           <SplitPane split="horizontal">
             <div className={styles.pane}>
               <h1>Right Top Pane</h1>

@@ -1,9 +1,11 @@
 import React, { useRef } from "react";
 import Editor from "@monaco-editor/react";
-
+import axios from "axios";
 type props = {
   language: string;
   value: string;
+  onChange: (value: string) => void;
+  reloadWindow: () => void;
 };
 
 const CodeEditor = (props: props) => {
@@ -14,6 +16,7 @@ const CodeEditor = (props: props) => {
 
   const handleEditorChange = (value, event) => {
     console.log("here is the current model value:", value);
+    props.onChange(value);
   };
 
   const handleEditorValidation = (markers) => {
@@ -21,8 +24,8 @@ const CodeEditor = (props: props) => {
     markers.forEach((marker) => console.log("onValidate:", marker.message));
   };
 
-  window.onload = function () {
-    alert("reload");
+  window.onload = () => {
+    props.reloadWindow();
   };
 
   return (
