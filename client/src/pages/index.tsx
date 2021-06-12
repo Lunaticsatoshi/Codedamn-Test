@@ -20,7 +20,7 @@ export default function Home() {
   return (
     <div>
       <Navbar />
-      <div>
+      <div className="select__inputs">
         <select className="select__input" id="Language">
           <option>javascript</option>
           <option>javascript</option>
