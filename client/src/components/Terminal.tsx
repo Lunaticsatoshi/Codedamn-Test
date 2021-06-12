@@ -42,7 +42,7 @@ const TerminalComponent = () => {
         return;
       } else {
         curr_lines =
-          curr_lines.substr(0, cursor) + data + curr_lines.substr(cursor);
+          curr_lines.substr(0, cursor) + curr_lines.substr(cursor) + data;
       }
     });
     // term.onKey(({ key, domEvent }) => {
