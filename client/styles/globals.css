@@ -74,15 +74,11 @@ a {
 .select__inputs {
   margin: 20px auto;
   padding: 10px 10px;
-  display: flex;
-  width: 100%;
-  justify-content: center;
-  align-items: center;
 }
 
-.edit__button {
+.save__button {
   background-color: rgb(235, 67, 45);
-  width: 40px;
+  width: 120px;
   height: 40px;
   padding: 10px;
   border-radius: 25px;
@@ -90,11 +86,12 @@ a {
   font-weight: bold;
   font-size: 1.24rem;
   border: none;
+  margin-left: 20px;
 }
 
 .select__input {
   height: 50px;
-  width: 170px;
+  width: 190px;
   background-color: #000000;
   color: #ffffff;
   border: 0.5px solid gray;
