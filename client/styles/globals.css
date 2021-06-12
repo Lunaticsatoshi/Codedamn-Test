@@ -71,6 +71,16 @@ a {
   color: #c60d0d;
 }
 
+.select__input {
+  height: 50px;
+  width: 170px;
+  background-color: #000000;
+  color: #ffffff;
+  border: 0.5px solid gray;
+  border-radius: 7px;
+  padding: 0 10px;
+}
+
 .xterm {
   font-feature-settings: "liga" 0;
   position: relative;
