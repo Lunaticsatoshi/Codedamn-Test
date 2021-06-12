@@ -74,6 +74,22 @@ a {
 .select__inputs {
   margin: 20px auto;
   padding: 10px 10px;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.edit__button {
+  background-color: rgb(235, 67, 45);
+  width: 40px;
+  height: 40px;
+  padding: 10px;
+  border-radius: 25px;
+  color: #ffffff;
+  font-weight: bold;
+  font-size: 1.24rem;
+  border: none;
 }
 
 .select__input {
