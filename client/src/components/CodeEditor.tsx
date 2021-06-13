@@ -1,6 +1,5 @@
 import React, { useRef } from "react";
 import Editor from "@monaco-editor/react";
-import axios from "axios";
 type props = {
   language: string;
   value: string;
