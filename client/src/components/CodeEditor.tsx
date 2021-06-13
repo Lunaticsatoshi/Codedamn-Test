@@ -4,10 +4,15 @@ type props = {
   language: string;
   value: string;
   onChange: (value: string) => void;
+  onEditorMount: () => Object;
   // reloadWindow: () => void;
 };
 
 const CodeEditor = (props: props) => {
+  function handleEditorWillMount(monaco) {
+    monaco.languages.typescript.javascriptDefaults.setEagerModelSync(true);
+  }
+
   const editorRef = useRef(null);
   const handleEditorDidMount = (editor, monaco) => {
     editorRef.current = editor;
@@ -32,6 +37,9 @@ const CodeEditor = (props: props) => {
     <Editor
       defaultLanguage={props.language}
       defaultValue={props.value}
+      language={props.language}
+      value={props.value}
+      beforeMount={handleEditorWillMount}
       onMount={handleEditorDidMount}
       onChange={handleEditorChange}
       onValidate={handleEditorValidation}

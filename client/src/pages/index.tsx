@@ -21,11 +21,11 @@ export default function Home() {
   const [language, setLanguage] = useState("javascript");
   const [value, setValue] = useState("//comment");
   const [srcDoc, setSourceDoc] = useState("");
-  const [langauges, setLanguages] = useState([]);
+  const [allLanguages, setAllLanguages] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
-      const { language } = await getData();
-      const { file, description } = language[0];
+      let { language } = await getData();
+      let { file, description } = language[0];
       if (file === "HTML") {
         setSourceDoc(description);
       } else {
@@ -51,7 +51,7 @@ export default function Home() {
       }
       setLanguage(file);
       setValue(description);
-      setLanguages([
+      setAllLanguages([
         "javascript",
         "typescript",
         "python",
@@ -62,11 +62,14 @@ export default function Home() {
         "php",
       ]);
     };
+
     fetchData();
   }, []);
 
   const getData = async () => {
-    const { data } = await axios.get("http://localhost:5000/api/v1/languages");
+    const { data } = await axios.get(
+      "https://codeddit-api.herokuapp.com/api/v1/languages"
+    );
     return data;
   };
   const onChange = (newValue) => {
@@ -80,22 +83,8 @@ export default function Home() {
 
   const onLanguageChange = (e) => {
     setLanguage(e.target.value);
+    console.log(value);
   };
-
-  // const reloadWindow = async () => {
-  //   console.log("reloading");
-  //   const newData = {
-  //     file: language,
-  //     description: value,
-  //   };
-  //   console.log(newData);
-  //   const { data } = await axios.post(
-  //     "http://localhost:5000/api/v1/addLanguages",
-  //     newData
-  //   );
-  //   console.log(data);
-  //   console.log("reloaded");
-  // };
 
   const saveData = async () => {
     const newData = {
@@ -104,10 +93,14 @@ export default function Home() {
     };
     console.log(newData);
     const { data } = await axios.post(
-      "http://localhost:5000/api/v1/addLanguages",
+      "https://codeddit-api.herokuapp.com/api/v1/addLanguages",
       newData
     );
     console.log(data);
+  };
+
+  const onEditorMount = () => {
+    return {};
   };
   return (
     <div>
@@ -119,8 +112,8 @@ export default function Home() {
           value={language}
           onChange={(e) => onLanguageChange(e)}
         >
-          {langauges.map((language) => (
-            <option key={language}>{language}</option>
+          {allLanguages.map((alangauge) => (
+            <option key={alangauge}>{alangauge}</option>
           ))}
         </select>
 
@@ -134,19 +127,20 @@ export default function Home() {
             language={language}
             value={value}
             onChange={onChange}
+            onEditorMount={onEditorMount}
             // reloadWindow={reloadWindow}
           />
           <SplitPane split="horizontal">
             <div className={styles.pane}>
               <div className={styles.output}>
-                <div>Top Pane</div>
                 <div className={styles.frame}>
+                  <h1>HTML Playground</h1>
                   <iframe
                     srcDoc={srcDoc}
                     title="output"
                     frameBorder="0"
-                    width="100%"
-                    height="100%"
+                    width="90%"
+                    height="90%"
                   />
                 </div>
               </div>
