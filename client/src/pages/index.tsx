@@ -20,10 +20,33 @@ const DynamicTerminal = dynamic(() => import("../components/Terminal"), {
 export default function Home() {
   const [language, setLanguage] = useState("javascript");
   const [value, setValue] = useState("//comment");
+  const [srcDoc, setSourceDoc] = useState("");
   useEffect(() => {
     const fetchData = async () => {
       const { language } = await getData();
       const { file, description } = language[0];
+      if (file === "html") {
+        setSourceDoc(description);
+      } else {
+        setSourceDoc(`
+        <html>
+        <head>
+        <style>
+        *{
+          background-color: #ffffff;
+        }
+         h1{
+           font-weight: bold;
+           font-size: 30px;
+         }
+        </style>
+        </head>
+        <body>
+          <h1>Welcome to Codedit!</h1>
+        </body>
+        </html>
+        `);
+      }
       setLanguage(file);
       setValue(description);
     };
@@ -36,6 +59,12 @@ export default function Home() {
   };
   const onChange = (newValue) => {
     setValue(newValue);
+    if (language === "html") {
+      const time = setTimeout(() => {
+        setSourceDoc(newValue);
+      }, 250);
+      clearTimeout(time);
+    }
   };
 
   const reloadWindow = async () => {
@@ -90,7 +119,18 @@ export default function Home() {
           />
           <SplitPane split="horizontal">
             <div className={styles.pane}>
-              <h1>Right Top Pane</h1>
+              <div className={styles.output}>
+                <div>Top Pane</div>
+                <div className={styles.frame}>
+                  <iframe
+                    srcDoc={srcDoc}
+                    title="output"
+                    frameBorder="0"
+                    width="100%"
+                    height="100%"
+                  />
+                </div>
+              </div>
             </div>
             <div className={styles.pane}>
               <DynamicTerminal />
