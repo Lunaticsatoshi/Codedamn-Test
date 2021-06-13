@@ -21,11 +21,12 @@ export default function Home() {
   const [language, setLanguage] = useState("javascript");
   const [value, setValue] = useState("//comment");
   const [srcDoc, setSourceDoc] = useState("");
+  const [langauges, setLanguages] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
       const { language } = await getData();
       const { file, description } = language[0];
-      if (file === "html") {
+      if (file === "HTML") {
         setSourceDoc(description);
       } else {
         setSourceDoc(`
@@ -34,6 +35,7 @@ export default function Home() {
         <style>
         *{
           background-color: #ffffff;
+          color: #FF0000
         }
          h1{
            font-weight: bold;
@@ -49,6 +51,16 @@ export default function Home() {
       }
       setLanguage(file);
       setValue(description);
+      setLanguages([
+        "javascript",
+        "typescript",
+        "python",
+        "HTML",
+        "java",
+        "ruby",
+        "c++",
+        "php",
+      ]);
     };
     fetchData();
   }, []);
@@ -58,29 +70,36 @@ export default function Home() {
     return data;
   };
   const onChange = (newValue) => {
+    console.log(newValue);
+    console.log(language);
     setValue(newValue);
-    if (language === "html") {
+    if (language === "HTML") {
       const time = setTimeout(() => {
         setSourceDoc(newValue);
       }, 250);
-      clearTimeout(time);
+      // clearTimeout(time);
+      // setSourceDoc(newValue);
     }
   };
 
-  const reloadWindow = async () => {
-    console.log("reloading");
-    const newData = {
-      file: language,
-      description: value,
-    };
-    console.log(newData);
-    const { data } = await axios.post(
-      "http://localhost:5000/api/v1/addLanguages",
-      newData
-    );
-    console.log(data);
-    console.log("reloaded");
+  const onLanguageChange = (e) => {
+    setLanguage(e.target.value);
   };
+
+  // const reloadWindow = async () => {
+  //   console.log("reloading");
+  //   const newData = {
+  //     file: language,
+  //     description: value,
+  //   };
+  //   console.log(newData);
+  //   const { data } = await axios.post(
+  //     "http://localhost:5000/api/v1/addLanguages",
+  //     newData
+  //   );
+  //   console.log(data);
+  //   console.log("reloaded");
+  // };
 
   const saveData = async () => {
     const newData = {
@@ -98,11 +117,15 @@ export default function Home() {
     <div>
       <Navbar />
       <div className="select__inputs">
-        <select className="select__input" id="language">
-          <option>javascript</option>
-          <option>javascript</option>
-          <option>javascript</option>
-          <option>javascript</option>
+        <select
+          className="select__input"
+          id="language"
+          value={language}
+          onChange={(e) => onLanguageChange(e)}
+        >
+          {langauges.map((language) => (
+            <option key={language}>{language}</option>
+          ))}
         </select>
 
         <button className="save__button" onClick={() => saveData()}>
@@ -115,7 +138,7 @@ export default function Home() {
             language={language}
             value={value}
             onChange={onChange}
-            reloadWindow={reloadWindow}
+            // reloadWindow={reloadWindow}
           />
           <SplitPane split="horizontal">
             <div className={styles.pane}>
