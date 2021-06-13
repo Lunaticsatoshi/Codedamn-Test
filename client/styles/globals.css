@@ -89,6 +89,28 @@ a {
   margin-left: 20px;
 }
 
+.alert {
+  height: 40px;
+  width: 100%;
+  max-width: 700px;
+  background-color: rgb(235, 67, 45);
+  color: #ffffff;
+  margin: 10px auto;
+  padding: 10px 10px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.alert__text {
+  font-size: 1.5rem;
+}
+.alert__close {
+  cursor: pointer;
+  font-size: 1.2rem;
+}
+
 .select__input {
   height: 50px;
   width: 190px;

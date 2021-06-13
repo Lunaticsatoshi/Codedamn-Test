@@ -19,6 +19,7 @@ const DynamicTerminal = dynamic(() => import("../components/Terminal"), {
 
 export default function Home() {
   const [language, setLanguage] = useState("javascript");
+  const [alert, showAlert] = useState(false);
   const [value, setValue] = useState("//comment");
   const [srcDoc, setSourceDoc] = useState("");
   const [allLanguages, setAllLanguages] = useState([]);
@@ -87,16 +88,22 @@ export default function Home() {
   };
 
   const saveData = async () => {
+    showAlert(true);
     const newData = {
       file: language,
       description: value,
     };
-    console.log(newData);
     const { data } = await axios.post(
       "https://codeddit-api.herokuapp.com/api/v1/addLanguages",
       newData
     );
-    console.log(data);
+    setTimeout(() => {
+      showAlert(false);
+    }, 3000);
+  };
+
+  const closeAlert = () => {
+    showAlert(false);
   };
 
   const onEditorMount = () => {
@@ -105,6 +112,18 @@ export default function Home() {
   return (
     <div>
       <Navbar />
+      {alert && (
+        <div className="alert">
+          <div className="alert__header">
+            <h1 className="alert__text">Saved Sucessfully!!</h1>
+          </div>
+          <div className="alert__header">
+            <h1 className="alert__close" onClick={() => closeAlert()}>
+              X
+            </h1>
+          </div>
+        </div>
+      )}
       <div className="select__inputs">
         <select
           className="select__input"
