@@ -5,7 +5,7 @@ type props = {
   language: string;
   value: string;
   onChange: (value: string) => void;
-  reloadWindow: () => void;
+  // reloadWindow: () => void;
 };
 
 const CodeEditor = (props: props) => {
@@ -24,9 +24,9 @@ const CodeEditor = (props: props) => {
     markers.forEach((marker) => console.log("onValidate:", marker.message));
   };
 
-  window.onload = () => {
-    props.reloadWindow();
-  };
+  // window.onload = () => {
+  //   props.reloadWindow();
+  // };
 
   return (
     <Editor
