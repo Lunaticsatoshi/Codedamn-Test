@@ -70,15 +70,11 @@ export default function Home() {
     return data;
   };
   const onChange = (newValue) => {
-    console.log(newValue);
-    console.log(language);
     setValue(newValue);
     if (language === "HTML") {
       const time = setTimeout(() => {
         setSourceDoc(newValue);
       }, 250);
-      // clearTimeout(time);
-      // setSourceDoc(newValue);
     }
   };
 

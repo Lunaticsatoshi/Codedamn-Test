@@ -14,6 +14,7 @@ const CodeEditor = (props: props) => {
   };
 
   const handleEditorChange = (value, event) => {
+    console.log(props.language);
     console.log("here is the current model value:", value);
     props.onChange(value);
   };
